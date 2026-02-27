@@ -11,3 +11,4 @@
 
 fragfile=Liscovitch-Brauer2021-K562_cells-Screen1.tsv.gz
 ~/.local/bin/macs2 callpeak -t $fragfile -g hs -f BED --nomodel --extsize 200 --shift -100 -n macs2 --outdir testpeaks
+grep -v "_alt" macs2_peaks.narrowPeak > filtered_peaks.narrowPeaks

@@ -9,17 +9,22 @@
 #SBATCH --output=mdlm_%j.GPU.log
 
 eval "$(conda shell.bash hook)"
-conda activate torch_cuda12
+conda activate /home/users/astar/gis/limtw/scratch/ls/envs/chrombpnet
+
 module load cuda/12.1.1
+module load samtools
+module load bedtools2
+
 fragfile=../tsinghua_scatac/K562/Liscovitch-Brauer2021/Pierce2021-K562_cells-R1.t
-hg38fa=../../../ref/Homo_sapiens.GRCh38.dna.primary_assembly.fa
-hg38chromsizes=../../../ref/GRCh38_EBV.chrom.sizes.tsv
-path2peaksbed=
+hg38fa=../test_data/hg38.fa
+hg38chromsizes=../test_data/hg38.chrom.sizes
+
+path2peaksbed=../tsinghua_scatac/K562/Liscovitch-Brauer2021/testpeaks/macs2_peaks.narrowPeak
 path2nonpeaksbed=
 fold0json=
 output_dir=
 
-chrombpnet bias pipeline \
+chrombpnet pipeline \
   -ifrag /path/to/input.tsv \ # only one of ibam, ifrag or itag is accepted
   -d "ATAC" \
   -g $hg38fa \
